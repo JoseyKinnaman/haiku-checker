@@ -1,0 +1,104 @@
+If we list all the natural numbers below 10 that are multiples of 3 or 5, we get 3, 5, 6 and 9. The sum of these multiples is 23.
+
+Find the sum of all the multiples of 3 or 5 below 1000.
+
+const multiplesOf = x =>{
+sum = 0
+for (let i = 0; i < x; i++) {
+ if (i % 3 === 0 || i % 5 === 0){
+   sum += i
+ }
+}
+return sum;
+}
+
+Mr. E Ven only likes even length words. Please create a translator so that he doesn't 
+have to hear those pesky odd length words. For some reason he also hates punctuation, 
+he likes his sentences to flow.
+
+Your translator should take in a string and output it with all odd length words 
+having an extra letter (the last letter in the word). It should also remove all 
+punctuation (.,?!) as well as any underscores (_).
+
+"How did we end up here? We go?" translated becomes-> "Howw didd we endd up here We go"
+
+ const mrEVen = (sentence) => {
+   let newSentence = "";
+   let words = sentence.split(" ");
+   let punctuation = ["!", ",", "?", "_", "@", "'"];
+   words.forEach(word => {
+      for (let i = 0; i < word.length; i ++) {
+        if (punctuation.includes(word[i])) {
+          word = word.replace(word[i], '');
+        }
+      }
+
+      if (word.length % 2 === 0) {
+        newSentence += word;
+      } else if (word.length % 2 != 0) {
+        letter = (word.split("")).slice((word.length), (word.length));
+        word = word + letter;
+        newSentence += word;
+      }
+    })
+    return newSentence;
+  }
+ 
+
+ The sum of the primes below 10 is 2 + 3 + 5 + 7 = 17.
+
+Find the sum of all the primes below two million.
+
+const primeSum = (num) =>{}
+  let numArr = [];
+   let sum  = 1;
+
+  for(i=1; i<=num; i++){
+    numArr.push(i)
+  }
+
+  for(i=0; i< num; i++){
+    for(j=1;j<num; j++){
+      if(numArr[i]%numArr[j]==0 && numArr[i]!=numArr[j]){
+        //is not a prime
+
+      } else{
+        sum += numArr[i]
+      }
+      
+    }
+ return sum
+  }
+
+  function primes(num){
+  let list = []
+  for(let i =2; i<num; ++i){
+    list.push(i)
+  }
+  list.forEach((item,i)=>{
+    for(let j =list.length; j>=0; j--){
+      if(list[j]%item === 0 && list[j] != item){ 
+      list.splice(j, 1)
+      }
+    }
+  })
+return list
+}
+
+
+}
+
+export function getPrimes(number, nums = [], prime = 2) {
+  if(number <= 2 || Number.isNaN(number)) {
+    return;
+  }
+  if (prime === nums[nums.length - 1]) {
+    return nums;
+  } else {
+    if (prime === 2) {
+      nums = [...Array(number).keys()].map(e => e + 1);
+    }
+    nums = nums.filter(e => ((e % prime) !== 0) && e > 1 || e === prime);
+    return getPrimes(number, nums, prime + 1);
+  }
+}
